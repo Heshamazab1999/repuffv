@@ -21,6 +21,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
     super.initState();
     if (_checkConfiguration()) {
       Future.delayed(Duration.zero, () {
+
         DatePicker.showDatePicker(context,
             showTitleActions: true,
             minTime: DateTime(1950, 1, 1),

@@ -23,6 +23,7 @@ dependencies:
   flutter_svg:
   flutter_datetime_picker:
   url_strategy: ^0.2.0
+  animated_bottom_navigation_bar: ^0.3.3
   pin_code_fields: ^7.3.0
   geolocator: ^8.0.1
   google_maps_flutter: ^2.1.1
@@ -54,6 +55,7 @@ flutter:
 
   assets:
     - assets/image/
+    - assets/image/logo.svg
     - assets/language/
 
   fonts:

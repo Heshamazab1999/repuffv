@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomNavItem extends StatelessWidget {
-  final IconData iconData;
+  final String iconData;
   final Function onTap;
   final bool isSelected;
+
   BottomNavItem({@required this.iconData, this.onTap, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: IconButton(
-        icon: Icon(iconData, color: isSelected ? Theme.of(context).primaryColor : Colors.grey, size: 25),
+        icon: SvgPicture.asset(
+          iconData,
+          color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
+        ),
         onPressed: onTap,
       ),
     );

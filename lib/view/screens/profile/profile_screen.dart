@@ -35,7 +35,9 @@ class ProfileScreen extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: ClipOval(child: CustomImage(
+            child:
+            ClipOval(child:
+            CustomImage(
               image: '${Get.find<SplashController>().configModel.baseUrls.customerImageUrl}'
                   '/${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.image : ''}',
               height: 100, width: 100, fit: BoxFit.cover,

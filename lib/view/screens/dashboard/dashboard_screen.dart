@@ -1,19 +1,20 @@
 import 'dart:async';
-
 import 'package:efood_multivendor/helper/responsive_helper.dart';
 import 'package:efood_multivendor/util/dimensions.dart';
+import 'package:efood_multivendor/util/images.dart';
 import 'package:efood_multivendor/view/base/cart_widget.dart';
 import 'package:efood_multivendor/view/screens/cart/cart_screen.dart';
 import 'package:efood_multivendor/view/screens/dashboard/widget/bottom_nav_item.dart';
 import 'package:efood_multivendor/view/screens/favourite/favourite_screen.dart';
 import 'package:efood_multivendor/view/screens/home/home_screen.dart';
-import 'package:efood_multivendor/view/screens/menu/menu_screen.dart';
 import 'package:efood_multivendor/view/screens/order/order_screen.dart';
+import 'package:efood_multivendor/view/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardScreen extends StatefulWidget {
   final int pageIndex;
+
   DashboardScreen({@required this.pageIndex});
 
   @override
@@ -37,10 +38,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     _screens = [
       HomeScreen(),
-      FavouriteScreen(),
       CartScreen(fromNav: true),
+      // FavouriteScreen(),
+      ProfileScreen(),
+      // CartScreen(fromNav: true),
       OrderScreen(),
-      Container(),
+      FavouriteScreen()
+      // Container(),
     ];
 
     Future.delayed(Duration(seconds: 1), () {
@@ -60,11 +64,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
           _setPage(0);
           return false;
         } else {
-          if(_canExit) {
+          if (_canExit) {
             return true;
-          }else {
+          } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('back_press_again_to_exit'.tr, style: TextStyle(color: Colors.white)),
+              content: Text('back_press_again_to_exit'.tr,
+                  style: TextStyle(color: Colors.white)),
               behavior: SnackBarBehavior.floating,
               backgroundColor: Colors.green,
               duration: Duration(seconds: 2),
@@ -78,43 +83,73 @@ class _DashboardScreenState extends State<DashboardScreen> {
           }
         }
       },
-      child: Scaffold(
-        key: _scaffoldKey,
-
-        floatingActionButton: ResponsiveHelper.isDesktop(context) ? null : FloatingActionButton(
-          elevation: 5,
-          backgroundColor: _pageIndex == 2 ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
-          onPressed: () => _setPage(2),
-          child: CartWidget(color: _pageIndex == 2 ? Theme.of(context).cardColor : Theme.of(context).disabledColor, size: 30),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-
-        bottomNavigationBar: ResponsiveHelper.isDesktop(context) ? SizedBox() : BottomAppBar(
-          elevation: 5,
-          notchMargin: 5,
-          clipBehavior: Clip.antiAlias,
-          shape: CircularNotchedRectangle(),
-
-          child: Padding(
-            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
-            child: Row(children: [
-              BottomNavItem(iconData: Icons.home, isSelected: _pageIndex == 0, onTap: () => _setPage(0)),
-              BottomNavItem(iconData: Icons.favorite, isSelected: _pageIndex == 1, onTap: () => _setPage(1)),
-              Expanded(child: SizedBox()),
-              BottomNavItem(iconData: Icons.shopping_bag, isSelected: _pageIndex == 3, onTap: () => _setPage(3)),
-              BottomNavItem(iconData: Icons.menu, isSelected: _pageIndex == 4, onTap: () {
-                Get.bottomSheet(MenuScreen(), backgroundColor: Colors.transparent, isScrollControlled: true);
-              }),
-            ]),
+      child: SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          floatingActionButton: ResponsiveHelper.isDesktop(context)
+              ? null
+              : FloatingActionButton(
+                  elevation: 5,
+                  backgroundColor: _pageIndex == 2
+                      ? Theme.of(context).primaryColor
+                      : Theme.of(context).cardColor,
+                  onPressed: () => _setPage(2),
+                  child: CartWidget(
+                      color: _pageIndex == 2
+                          ? Theme.of(context).cardColor
+                          : Theme.of(context).disabledColor,
+                      size: 30),
+                ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: ResponsiveHelper.isDesktop(context)
+              ? SizedBox()
+              : Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: BottomAppBar(
+                    elevation: 5,
+                    // notchMargin: 5,
+                    clipBehavior: Clip.antiAlias,
+                    shape: CircularNotchedRectangle(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      child: Row(children: [
+                        BottomNavItem(
+                            iconData: Images.home_icon,
+                            isSelected: _pageIndex == 0,
+                            onTap: () => _setPage(0)),
+                        BottomNavItem(
+                            iconData: Images.shopping_icon,
+                            isSelected: _pageIndex == 1,
+                            onTap: () => _setPage(1)),
+                        Expanded(child: SizedBox()),
+                        BottomNavItem(
+                            iconData: Images.comment_icon,
+                            isSelected: _pageIndex == 3,
+                            onTap: () => _setPage(3)),
+                        BottomNavItem(
+                            iconData: Images.fav_icon,
+                            isSelected: _pageIndex == 4,
+                            onTap: () {
+                              _setPage(4);
+                            })
+                        //   Get.bottomSheet(MenuScreen(),
+                        //       backgroundColor: Colors.transparent,
+                        //       isScrollControlled: true);
+                        // }),
+                      ]),
+                    ),
+                  ),
+                ),
+          body: PageView.builder(
+            controller: _pageController,
+            itemCount: _screens.length,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return _screens[index];
+            },
           ),
-        ),
-        body: PageView.builder(
-          controller: _pageController,
-          itemCount: _screens.length,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return _screens[index];
-          },
         ),
       ),
     );

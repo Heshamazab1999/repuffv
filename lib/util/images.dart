@@ -2,7 +2,13 @@ class Images {
   static const String egypt = 'assets/image/egypt.png';
   static const String united = 'assets/image/united.png';
   static const String logo = 'assets/image/logo.gif';
-  static const String logoSvg = 'assets/image/logo_repuff.svg';
+  static const String logoSvg = 'assets/image/logo.svg';
+  static const String logopng = 'assets/image/logo_repuff.png';
+  static const String home_icon = 'assets/image/home.svg';
+  static const String shopping_icon = 'assets/image/shopping-cart.svg';
+  static const String fav_icon = 'assets/image/heart-line.svg';
+  static const String comment_icon = 'assets/image/comment-alt.svg';
+
   static const String logo_name = 'assets/image/logo_name.png';
   static const String placeholder = 'assets/image/placeholder.jpg';
   static const String arabic = 'assets/image/arabic.png';

@@ -382,5 +382,6 @@
   "or": "OR",
   "gender": "Gender",
   "male": "Male",
-  "female": "Female"
+  "female": "Female",
+  "confirm": "CONFIRM"
 }
