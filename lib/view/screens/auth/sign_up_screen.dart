@@ -37,12 +37,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final FocusNode _emailFocus = FocusNode();
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
+  final FocusNode _birthFocus = FocusNode();
   final FocusNode _confirmPasswordFocus = FocusNode();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _birthController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   String _countryDialCode;
@@ -334,12 +336,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               border: AppConstants.decorationSignUpScreen,
                               focusBorder: AppConstants.decorationSignUpScreen,
                               hintText: 'date_birth'.tr,
-                              controller: _passwordController,
-                              focusNode: _passwordFocus,
-                              nextFocus: _confirmPasswordFocus,
+                              controller: _birthController,
+                              focusNode: _birthFocus,
+                              nextFocus: _passwordFocus,
                               inputType: TextInputType.visiblePassword,
                               prefixIcon: Images.lock,
-                              isPassword: true,
+                              isPassword: false,
                               divider: true,
                             ),
                           ),

@@ -8,6 +8,10 @@ class Images {
   static const String shopping_icon = 'assets/image/shopping-cart.svg';
   static const String fav_icon = 'assets/image/heart-line.svg';
   static const String comment_icon = 'assets/image/comment-alt.svg';
+  static const String svgUser = 'assets/image/user.svg';
+  static const String SvgSettings = 'assets/image/settings.svg';
+  static const String SvgMarker = 'assets/image/map-marker.svg';
+  static const String SvgGlobe = 'assets/image/globe.svg';
 
   static const String logo_name = 'assets/image/logo_name.png';
   static const String placeholder = 'assets/image/placeholder.jpg';
