@@ -48,7 +48,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
         child: SizedBox(
           width: 250,
           child: CustomButton(
-            buttonText: "next",
+            buttonText: "next".tr,
             radius: 50,
             onPressed: () {
               if (check <= 18) {

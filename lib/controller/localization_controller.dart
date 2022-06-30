@@ -89,6 +89,12 @@ class LocalizationController extends GetxController implements GetxService {
     update();
   }
 
+  bool isLoading = false;
+
+  checkFun() {
+    isLoading =! isLoading;
+  }
+
   void searchLanguage(String query) {
     if (query.isEmpty) {
       _languages = [];

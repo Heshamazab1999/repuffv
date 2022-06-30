@@ -320,7 +320,7 @@
   "delivery_man_not_assigned": "لم يتم تعيين رجل التوصيل بعد",
   "payment": "قسط",
   "scheduled_at": "مجدولة في",
-  "address": "تبوك",
+  "address": "العنوان",
   "unable_to_launch_google_map": "غير قادر على تشغيل خريطة جوجل",
   "connected": "متصل",
   "no_connection": "لا يوجد اتصال بالإنترنت",
@@ -383,5 +383,16 @@
   "gender": "النوع",
   "male": "ذكر",
   "female": "انثى",
-  "confirm": "تم"
+  "confirm": "تم",
+  "change_language": "تغير اللغه",
+  "personal_information": "معلومات شخصيه",
+  "add_address": "اضافه او تعديل العنوان",
+  "design_profile": "تصميم الملف الشخصي",
+  "contact_us": "تواصل معنا",
+  "old_password": "كلمة السر القديمة",
+  "change": "تغيير",
+  "user": "المستخدم",
+  "city": "المدينة",
+  "country": "الدولة",
+  "facebook": "فيسبوك"
 }

@@ -383,5 +383,16 @@
   "gender": "Gender",
   "male": "Male",
   "female": "Female",
-  "confirm": "CONFIRM"
+  "confirm": "CONFIRM",
+  "change_language": "Change Language",
+  "personal_information": "Personal Information",
+  "add_address": "Add,Edit Your Address",
+  "design_profile": "Design Your Profile",
+  "contact_us": "Contact",
+  "old_password": "Old Password",
+  "change": "Change",
+  "user": "User",
+  "city": "City",
+  "country": "Country",
+  "facebook": "Facebook"
 }

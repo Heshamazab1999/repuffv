@@ -3,6 +3,7 @@ class Images {
   static const String united = 'assets/image/united.png';
   static const String logo = 'assets/image/logo.gif';
   static const String logoSvg = 'assets/image/logo.svg';
+  static const String backSvg = 'assets/image/back.svg';
   static const String logopng = 'assets/image/logo_repuff.png';
   static const String home_icon = 'assets/image/home.svg';
   static const String shopping_icon = 'assets/image/shopping-cart.svg';
@@ -12,6 +13,8 @@ class Images {
   static const String SvgSettings = 'assets/image/settings.svg';
   static const String SvgMarker = 'assets/image/map-marker.svg';
   static const String SvgGlobe = 'assets/image/globe.svg';
+  static const String doorKey = 'assets/image/door-key.svg';
+  static const String customerCare = 'assets/image/customer-care.svg';
 
   static const String logo_name = 'assets/image/logo_name.png';
   static const String placeholder = 'assets/image/placeholder.jpg';

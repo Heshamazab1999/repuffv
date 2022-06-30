@@ -18,6 +18,8 @@ import 'package:efood_multivendor/view/screens/calender_screen/calender_screen.d
 import 'package:efood_multivendor/view/screens/cart/cart_screen.dart';
 import 'package:efood_multivendor/view/screens/category/category_product_screen.dart';
 import 'package:efood_multivendor/view/screens/category/category_screen.dart';
+import 'package:efood_multivendor/view/screens/change_language/change_language.dart';
+import 'package:efood_multivendor/view/screens/change_password/change_password.dart';
 import 'package:efood_multivendor/view/screens/checkout/checkout_screen.dart';
 import 'package:efood_multivendor/view/screens/checkout/order_successful_screen.dart';
 import 'package:efood_multivendor/view/screens/checkout/payment_screen.dart';
@@ -46,6 +48,7 @@ import 'package:efood_multivendor/view/screens/restaurant/restaurant_screen.dart
 import 'package:efood_multivendor/view/screens/restaurant/review_screen.dart';
 import 'package:efood_multivendor/view/screens/search/search_screen.dart';
 import 'package:efood_multivendor/view/screens/select_login/select_login_screen.dart';
+import 'package:efood_multivendor/view/screens/settings/setting_screen.dart';
 import 'package:efood_multivendor/view/screens/splash/splash_screen.dart';
 import 'package:efood_multivendor/view/screens/support/support_screen.dart';
 import 'package:efood_multivendor/view/screens/update/update_screen.dart';
@@ -95,6 +98,9 @@ class RouteHelper {
   static const String allRestaurants = '/restaurants';
   static const String selectLogin = '/select_login';
   static const String calenderScreen = '/calender_screen';
+  static const String changeLanguage = '/change_language';
+  static const String setting = '/setting_screen';
+  static const String changePassword = '/change_password';
 
   static String getInitialRoute() => '$initial';
 
@@ -104,9 +110,15 @@ class RouteHelper {
 
   static String getOnBoardingRoute() => '$onBoarding';
 
+  static String getChangePasswordRoute() => '$changePassword';
+
   static String getSignInRoute(String page) => '$signIn?page=$page';
 
   static String getSignUpRoute() => '$signUp';
+
+  static String getSettingRoute() => '$setting';
+
+  static String getChangeLanguage() => '$changeLanguage';
 
   static String getSelectLoginRoute() => '$signUp';
 
@@ -231,6 +243,8 @@ class RouteHelper {
             ChooseLanguageScreen(fromMenu: Get.parameters['page'] == 'menu')),
     GetPage(name: onBoarding, page: () => OnBoardingScreen()),
     GetPage(name: calenderScreen, page: () => CalenderScreen()),
+    GetPage(name: setting, page: () => SettingScreen()),
+    GetPage(name: changePassword, page: () => ChangePassword()),
     GetPage(
         name: signIn,
         page: () => SignInScreen(
@@ -239,6 +253,7 @@ class RouteHelper {
                   Get.parameters['page'] == onBoarding,
             )),
     GetPage(name: signUp, page: () => SignUpScreen()),
+    GetPage(name: changeLanguage, page: () => ChangeLanguage()),
     GetPage(name: selectLogin, page: () => SelectLogin()),
     GetPage(
         name: verification,
