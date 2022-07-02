@@ -394,5 +394,9 @@
   "user": "User",
   "city": "City",
   "country": "Country",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "event": "Event",
+  "store": "Stores",
+  "online_stores": "Online Stores",
+  "used_market": "Used Market"
 }

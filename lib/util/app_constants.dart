@@ -7,8 +7,7 @@ import 'dimensions.dart';
 class AppConstants {
   static const String APP_NAME = 'Repuff';
   static const double APP_VERSION = 5.3;
-
-  static const String BASE_URL = 'https://repuff.amsegy.com';
+  static const String BASE_URL = 'https://repuffapp.com';
   static const String CATEGORY_URI = '/api/v1/categories';
   static const String BANNER_URI = '/api/v1/banners';
   static const String RESTAURANT_PRODUCT_URI = '/api/v1/products/latest';

@@ -25,6 +25,7 @@ import 'package:efood_multivendor/view/screens/checkout/order_successful_screen.
 import 'package:efood_multivendor/view/screens/checkout/payment_screen.dart';
 import 'package:efood_multivendor/view/screens/coupon/coupon_screen.dart';
 import 'package:efood_multivendor/view/screens/dashboard/dashboard_screen.dart';
+import 'package:efood_multivendor/view/screens/event/event_screen.dart';
 import 'package:efood_multivendor/view/screens/food/item_campaign_screen.dart';
 import 'package:efood_multivendor/view/screens/food/popular_food_screen.dart';
 import 'package:efood_multivendor/view/screens/forget/forget_pass_screen.dart';
@@ -50,6 +51,7 @@ import 'package:efood_multivendor/view/screens/search/search_screen.dart';
 import 'package:efood_multivendor/view/screens/select_login/select_login_screen.dart';
 import 'package:efood_multivendor/view/screens/settings/setting_screen.dart';
 import 'package:efood_multivendor/view/screens/splash/splash_screen.dart';
+import 'package:efood_multivendor/view/screens/stores/stores.dart';
 import 'package:efood_multivendor/view/screens/support/support_screen.dart';
 import 'package:efood_multivendor/view/screens/update/update_screen.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +103,8 @@ class RouteHelper {
   static const String changeLanguage = '/change_language';
   static const String setting = '/setting_screen';
   static const String changePassword = '/change_password';
+  static const String eventScreen = '/event_screen';
+  static const String storesScreen = '/stores_screen';
 
   static String getInitialRoute() => '$initial';
 
@@ -109,6 +113,10 @@ class RouteHelper {
   static String getLanguageRoute(String page) => '$language?page=$page';
 
   static String getOnBoardingRoute() => '$onBoarding';
+
+  static String getEventRoute() => '$eventScreen';
+
+  static String getStoresRoute() => '$storesScreen';
 
   static String getChangePasswordRoute() => '$changePassword';
 
@@ -244,6 +252,7 @@ class RouteHelper {
     GetPage(name: onBoarding, page: () => OnBoardingScreen()),
     GetPage(name: calenderScreen, page: () => CalenderScreen()),
     GetPage(name: setting, page: () => SettingScreen()),
+    GetPage(name: storesScreen, page: () => Stores()),
     GetPage(name: changePassword, page: () => ChangePassword()),
     GetPage(
         name: signIn,
@@ -255,6 +264,7 @@ class RouteHelper {
     GetPage(name: signUp, page: () => SignUpScreen()),
     GetPage(name: changeLanguage, page: () => ChangeLanguage()),
     GetPage(name: selectLogin, page: () => SelectLogin()),
+    GetPage(name: eventScreen, page: () => EventScreen()),
     GetPage(
         name: verification,
         page: () {

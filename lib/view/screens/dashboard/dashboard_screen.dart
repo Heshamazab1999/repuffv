@@ -5,7 +5,9 @@ import 'package:efood_multivendor/util/images.dart';
 import 'package:efood_multivendor/view/base/cart_widget.dart';
 import 'package:efood_multivendor/view/screens/cart/cart_screen.dart';
 import 'package:efood_multivendor/view/screens/dashboard/widget/bottom_nav_item.dart';
+import 'package:efood_multivendor/view/screens/event/event_screen.dart';
 import 'package:efood_multivendor/view/screens/favourite/favourite_screen.dart';
+import 'package:efood_multivendor/view/screens/home/home.dart';
 import 'package:efood_multivendor/view/screens/home/home_screen.dart';
 import 'package:efood_multivendor/view/screens/order/order_screen.dart';
 import 'package:efood_multivendor/view/screens/profile/profile_screen.dart';
@@ -37,12 +39,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _pageController = PageController(initialPage: widget.pageIndex);
 
     _screens = [
-      HomeScreen(),
+      Home(),
       CartScreen(fromNav: true),
       // FavouriteScreen(),
       ProfileScreen(),
       // CartScreen(fromNav: true),
-      OrderScreen(),
+      EventScreen(),
       FavouriteScreen()
       // Container(),
     ];
