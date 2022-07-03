@@ -195,6 +195,7 @@ class Home extends StatelessWidget {
                       if (index == 0) {
                         Get.toNamed(RouteHelper.storesScreen);
                       } else if (index == 1) {
+                        // Get.to(()=>HomeScreen());
                       } else if (index == 2) {
                         Get.toNamed(RouteHelper.eventScreen);
                       }

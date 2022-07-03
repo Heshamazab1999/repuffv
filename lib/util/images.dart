@@ -6,6 +6,7 @@ class Images {
   static const String backSvg = 'assets/image/back.svg';
   static const String eventsSvg = 'assets/image/events.jpg';
   static const String onlineSvg = 'assets/image/online.png';
+  static const String chatSvg = 'assets/image/chat.svg';
   static const String storespng = 'assets/image/stores.png';
   static const String used_marketSvg = 'assets/image/used_market.jpg';
   static const String logopng = 'assets/image/logo_repuff.png';

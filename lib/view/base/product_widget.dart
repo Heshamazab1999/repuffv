@@ -127,7 +127,7 @@ class ProductWidget extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 5),
                     DiscountTag(
@@ -142,14 +142,13 @@ class ProductWidget extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          RatingBar(
-                            rating: isRestaurant
-                                ? restaurant.avgRating
-                                : product.avgRating,
-                            size: _desktop ? 15 : 15,
-                            ratingCount: isRestaurant
-                                ? restaurant.ratingCount
-                                : product.ratingCount,
+                          Text(
+                            isRestaurant ? restaurant.name : product.name,
+                            style: robotoMedium.copyWith(
+                                color: Colors.red,
+                                fontSize: Dimensions.fontSizeLarge),
+                            maxLines: _desktop ? 2 : 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           Flexible(
                             child: Text(
@@ -161,16 +160,16 @@ class ProductWidget extends StatelessWidget {
                                 color: Theme.of(context).primaryColor,
                               ),
                               maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Text(
-                            isRestaurant ? restaurant.name : product.name,
-                            style: robotoMedium.copyWith(
-                                color: Colors.red,
-                                fontSize: Dimensions.fontSizeLarge),
-                            maxLines: _desktop ? 2 : 1,
-                            overflow: TextOverflow.ellipsis,
+                          RatingBar(
+                            rating: isRestaurant
+                                ? restaurant.avgRating
+                                : product.avgRating,
+                            size: _desktop ? 15 : 15,
+                            ratingCount: isRestaurant
+                                ? restaurant.ratingCount
+                                : product.ratingCount,
                           ),
                         ],
                       ),
