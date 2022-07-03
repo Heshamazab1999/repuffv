@@ -169,7 +169,7 @@ class ProfileScreen extends StatelessWidget {
                                       } else if (index == 1) {
                                         Get.toNamed(RouteHelper.changeLanguage);
                                       } else if (index == 2) {
-                                        Get.toNamed(RouteHelper.eventScreen);
+                                        // Get.toNamed(RouteHelper.eventScreen);
                                       } else if (index == 3) {
                                         Get.toNamed(RouteHelper.setting);
                                       }

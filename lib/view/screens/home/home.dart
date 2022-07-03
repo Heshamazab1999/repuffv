@@ -193,9 +193,8 @@ class Home extends StatelessWidget {
                   return GestureDetector(
                     onTap: () {
                       if (index == 0) {
-                        Get.to(() => HomeScreen());
-                      } else if (index == 1) {
                         Get.toNamed(RouteHelper.storesScreen);
+                      } else if (index == 1) {
                       } else if (index == 2) {
                         Get.toNamed(RouteHelper.eventScreen);
                       }

@@ -1,20 +1,38 @@
+import 'package:efood_multivendor/controller/auth_controller.dart';
 import 'package:efood_multivendor/controller/location_controller.dart';
+import 'package:efood_multivendor/controller/restaurant_controller.dart';
+import 'package:efood_multivendor/controller/user_controller.dart';
 import 'package:efood_multivendor/helper/responsive_helper.dart';
 import 'package:efood_multivendor/helper/route_helper.dart';
 import 'package:efood_multivendor/util/dimensions.dart';
 import 'package:efood_multivendor/util/images.dart';
 import 'package:efood_multivendor/util/styles.dart';
 import 'package:efood_multivendor/view/base/web_menu_bar.dart';
+import 'package:efood_multivendor/view/screens/home/widget/restaurant_view.dart';
 import 'package:efood_multivendor/view/screens/stores/widget/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class Stores extends StatelessWidget {
+  static Future<void> loadData(bool reload) async {
+    Get.find<RestaurantController>()
+        .getPopularRestaurantList(reload, 'all', false);
+    Get.find<RestaurantController>()
+        .getLatestRestaurantList(reload, 'all', false);
+    Get.find<RestaurantController>().getRestaurantList('1', reload);
+    if (Get.find<AuthController>().isLoggedIn()) {
+      Get.find<UserController>().getUserInfo();
+    }
+  }
+
   const Stores({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    loadData(false);
+    final ScrollController _scrollController = ScrollController();
+
     return SafeArea(
         child: Scaffold(
             appBar: ResponsiveHelper.isDesktop(context)
@@ -171,13 +189,16 @@ class Stores extends StatelessWidget {
                       ]),
                     ),
                   )),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      physics: ClampingScrollPhysics(),
-                      itemBuilder: (ctx, index) {
-                        return CardStore();
-                      })
+                  RestaurantView(
+                      scrollController: _scrollController),
+                  // ListView.builder(
+                  //     shrinkWrap: true,
+                  //     itemCount: 3,
+                  //     physics: ClampingScrollPhysics(),
+                  //     itemBuilder: (ctx, index) {
+                  //       return CardStore();
+                  //     }),
+
                 ],
               ),
             )));
