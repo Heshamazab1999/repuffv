@@ -33,8 +33,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _dateOfBirth = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _facebookController = TextEditingController();
   bool _isLoggedIn;
   String dropdownvalue = 'male'.tr;
+  int gender;
 
   // List of items in our dropdown menu
   var items = [
@@ -65,6 +71,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           _lastNameController.text = userController.userInfoModel.lName ?? '';
           _phoneController.text = userController.userInfoModel.phone ?? '';
           _emailController.text = userController.userInfoModel.email ?? '';
+          _dateOfBirth.text = userController.userInfoModel.date_of_birth ?? '';
+          _addressController.text = userController.userInfoModel.address ?? '';
+          _countryController.text = userController.userInfoModel.country ?? '';
+          _cityController.text = userController.userInfoModel.city ?? '';
+          _facebookController.text =
+              userController.userInfoModel.facebook ?? '';
+          gender = userController.userInfoModel.gender;
         }
 
         return _isLoggedIn
@@ -130,7 +143,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _firstNameController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -153,7 +168,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _lastNameController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -176,7 +193,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _emailController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -199,7 +218,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _phoneController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -261,6 +282,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       onChanged: (newValue) {
                                         setState(() {
                                           dropdownvalue = newValue;
+                                          if (dropdownvalue == 'Male') {
+                                            gender = 0;
+                                            print(gender);
+                                          } else {
+                                            gender = 1;
+                                            print(gender);
+                                          }
                                         });
                                       },
                                     ),
@@ -288,7 +316,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _dateOfBirth.text = v;
+                                    print(_dateOfBirth.text);
+                                  },
                                 ),
                               ),
                             ],
@@ -311,7 +342,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _addressController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -334,7 +367,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _countryController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -357,7 +392,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _cityController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -380,7 +417,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 5,
                                 child: FixedTextField(
-                                  onChanged: (v) {},
+                                  onChanged: (v) {
+                                    _facebookController.text = v;
+                                  },
                                 ),
                               ),
                             ],
@@ -410,10 +449,22 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     String _lastName = _lastNameController.text.trim();
     String _email = _emailController.text.trim();
     String _phoneNumber = _phoneController.text.trim();
+    String _dateofBirth = _dateOfBirth.text.trim();
+    String _address = _addressController.text.trim();
+    String _country = _countryController.text.trim();
+    String _city = _cityController.text.trim();
+    String _facebook = _facebookController.text.trim();
+    int Gender = gender;
     if (userController.userInfoModel.fName == _firstName &&
         userController.userInfoModel.lName == _lastName &&
         userController.userInfoModel.phone == _phoneNumber &&
-        userController.userInfoModel.email == _emailController.text &&
+        userController.userInfoModel.email == _email &&
+        userController.userInfoModel.address == _address &&
+        userController.userInfoModel.city == _city &&
+        userController.userInfoModel.country == _country &&
+        userController.userInfoModel.facebook == _facebook &&
+        userController.userInfoModel.date_of_birth == _dateofBirth &&
+        userController.userInfoModel.gender == Gender &&
         userController.pickedFile == null) {
       showCustomSnackBar('change_something_to_update'.tr);
     } else if (_firstName.isEmpty) {
@@ -428,12 +479,28 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       showCustomSnackBar('enter_phone_number'.tr);
     } else if (_phoneNumber.length < 6) {
       showCustomSnackBar('enter_a_valid_phone_number'.tr);
+    } else if (_addressController.text.isEmpty) {
+      showCustomSnackBar('enter_address'.tr);
+    } else if (_cityController.text.isEmpty) {
+      showCustomSnackBar('enter_city'.tr);
+    } else if (_countryController.text.isEmpty) {
+      showCustomSnackBar('enter_country'.tr);
+    } else if (_facebookController.text.isEmpty) {
+      showCustomSnackBar('enter_facebook_link'.tr);
+    } else if (_dateOfBirth.text.isEmpty) {
+      showCustomSnackBar('date_birth'.tr);
     } else {
       UserInfoModel _updatedUser = UserInfoModel(
           fName: _firstName,
           lName: _lastName,
           email: _email,
-          phone: _phoneNumber);
+          phone: _phoneNumber,
+          address: _address,
+          city: _city,
+          date_of_birth: _dateofBirth,
+          country: _country,
+          facebook: _facebook,
+          gender: Gender);
       ResponseModel _responseModel = await userController.updateUserInfo(
           _updatedUser, Get.find<AuthController>().getUserToken());
       if (_responseModel.isSuccess) {

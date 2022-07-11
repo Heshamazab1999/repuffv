@@ -9,7 +9,6 @@ import 'package:efood_multivendor/util/images.dart';
 import 'package:efood_multivendor/util/styles.dart';
 import 'package:efood_multivendor/view/base/web_menu_bar.dart';
 import 'package:efood_multivendor/view/screens/home/widget/restaurant_view.dart';
-import 'package:efood_multivendor/view/screens/stores/widget/cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,7 @@ class Stores extends StatelessWidget {
         .getPopularRestaurantList(reload, 'all', false);
     Get.find<RestaurantController>()
         .getLatestRestaurantList(reload, 'all', false);
-    Get.find<RestaurantController>().getRestaurantList('1', reload);
+     Get.find<RestaurantController>().getRestaurantList('1', reload);
     if (Get.find<AuthController>().isLoggedIn()) {
       Get.find<UserController>().getUserInfo();
     }
@@ -62,7 +61,11 @@ class Stores extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w200)),
-                          SvgPicture.asset(Images.backSvg),
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: SvgPicture.asset(Images.backSvg)),
                         ],
                       ),
                     ),
@@ -189,8 +192,7 @@ class Stores extends StatelessWidget {
                       ]),
                     ),
                   )),
-                  RestaurantView(
-                      scrollController: _scrollController),
+                  RestaurantView(scrollController: _scrollController),
                   // ListView.builder(
                   //     shrinkWrap: true,
                   //     itemCount: 3,
@@ -198,7 +200,6 @@ class Stores extends StatelessWidget {
                   //     itemBuilder: (ctx, index) {
                   //       return CardStore();
                   //     }),
-
                 ],
               ),
             )));

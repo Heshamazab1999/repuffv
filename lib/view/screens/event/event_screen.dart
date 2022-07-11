@@ -48,7 +48,11 @@ class EventScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.w200)),
-                      SvgPicture.asset(Images.backSvg),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: SvgPicture.asset(Images.backSvg)),
                     ],
                   ),
                 ),

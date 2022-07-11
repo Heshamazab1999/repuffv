@@ -1,7 +1,6 @@
 import 'package:efood_multivendor/data/model/response/language_model.dart';
 import 'package:efood_multivendor/util/images.dart';
 import 'package:flutter/material.dart';
-
 import 'dimensions.dart';
 
 class AppConstants {

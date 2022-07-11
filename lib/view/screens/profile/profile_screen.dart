@@ -113,28 +113,51 @@ class ProfileScreen extends StatelessWidget {
                                       ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.phone : ''}'),
                                 ],
                               ),
-                              _isLoggedIn
-                                  ? GetBuilder<LocationController>(
-                                      builder: (locationController) {
-                                      return Row(
-                                        children: [
-                                          Text("address".tr,
-                                              style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                                fontSize:
-                                                    Dimensions.fontSizeLarge,
-                                              )),
-                                          Flexible(
-                                            child: Text(
-                                              ' : ${(locationController.getUserAddress().address != null && _isLoggedIn) ? locationController.getUserAddress().address : ''}',
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    })
-                                  : Container(),
+                              Row(
+                                children: [
+                                  Text("Country".tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: Dimensions.fontSizeLarge,
+                                      )),
+                                  Flexible(
+                                    child: Text(
+                                      ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.country : ''}',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("address".tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: Dimensions.fontSizeLarge,
+                                      )),
+                                  Flexible(
+                                    child: Text(
+                                      ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.address : ''}',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("City".tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: Dimensions.fontSizeLarge,
+                                      )),
+                                  Flexible(
+                                    child: Text(
+                                      ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.city : ''}',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Row(
                                 children: [
                                   Text("date_birth".tr,
@@ -142,7 +165,12 @@ class ProfileScreen extends StatelessWidget {
                                         color: Theme.of(context).primaryColor,
                                         fontSize: Dimensions.fontSizeLarge,
                                       )),
-                                  Text(" : 6/10/1999 "),
+                                  Flexible(
+                                    child: Text(
+                                      ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.date_of_birth : ''}',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -169,7 +197,7 @@ class ProfileScreen extends StatelessWidget {
                                       } else if (index == 1) {
                                         Get.toNamed(RouteHelper.changeLanguage);
                                       } else if (index == 2) {
-                                         Get.toNamed(RouteHelper.address);
+                                        Get.toNamed(RouteHelper.address);
                                       } else if (index == 3) {
                                         Get.toNamed(RouteHelper.setting);
                                       }

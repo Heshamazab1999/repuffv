@@ -4,8 +4,17 @@ class SignUpBody {
   String phone;
   String email;
   String password;
+  String birthDate;
+  int gender;
 
-  SignUpBody({this.fName, this.lName, this.phone, this.email='', this.password});
+  SignUpBody(
+      {this.fName,
+      this.lName,
+      this.phone,
+      this.email = '',
+      this.password,
+      this.gender,
+      this.birthDate});
 
   SignUpBody.fromJson(Map<String, dynamic> json) {
     fName = json['f_name'];
@@ -13,6 +22,8 @@ class SignUpBody {
     phone = json['phone'];
     email = json['email'];
     password = json['password'];
+    birthDate = json['date_of_birth'];
+    gender = json['gender'];
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +33,8 @@ class SignUpBody {
     data['phone'] = this.phone;
     data['email'] = this.email;
     data['password'] = this.password;
+    data['date_of_birth'] = this.birthDate;
+    data['gender'] = this.gender;
     return data;
   }
 }

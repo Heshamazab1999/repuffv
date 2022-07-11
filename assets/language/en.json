@@ -398,5 +398,10 @@
   "event": "Event",
   "store": "Stores",
   "online_stores": "Online Stores",
-  "used_market": "Used Market"
+  "used_market": "Used Market",
+  "name_product": "Name Product",
+  "description_product": "Description Product",
+  "price_product": "Price Product",
+  "add_product": "Add Product",
+  "field_empty": "Field Empty"
 }

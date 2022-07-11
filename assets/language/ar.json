@@ -398,5 +398,10 @@
   "event": "الحدث",
   "store": "المتجر",
   "online_store": "متجر عبر الإنترنت",
-  "used_market": "السوق المستخدم"
+  "used_market": "السوق المستخدم",
+  "name_product": "اسم المنتج",
+  "price_product": "سعر المنتج",
+  "description_product": "وصف المنتج",
+  "add_product": "اضافه منتج",
+  "field_empty": "حقل فارغ"
 }

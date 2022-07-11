@@ -54,6 +54,8 @@ import 'package:efood_multivendor/view/screens/splash/splash_screen.dart';
 import 'package:efood_multivendor/view/screens/stores/stores.dart';
 import 'package:efood_multivendor/view/screens/support/support_screen.dart';
 import 'package:efood_multivendor/view/screens/update/update_screen.dart';
+import 'package:efood_multivendor/view/screens/used_market/used_market.dart';
+import 'package:efood_multivendor/view/screens/used_market/used_market_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -105,6 +107,8 @@ class RouteHelper {
   static const String changePassword = '/change_password';
   static const String eventScreen = '/event_screen';
   static const String storesScreen = '/stores_screen';
+  static const String usedMarketScreen = '/used_market_Screen';
+  static const String usedMarket = '/used_market';
 
   static String getInitialRoute() => '$initial';
 
@@ -125,6 +129,10 @@ class RouteHelper {
   static String getSignUpRoute() => '$signUp';
 
   static String getSettingRoute() => '$setting';
+
+  static String getUsedMarketScreenRoute() => '$usedMarketScreen';
+
+  static String getUsedMarketRoute() => '$usedMarket';
 
   static String getChangeLanguage() => '$changeLanguage';
 
@@ -253,6 +261,8 @@ class RouteHelper {
     GetPage(name: calenderScreen, page: () => CalenderScreen()),
     GetPage(name: setting, page: () => SettingScreen()),
     GetPage(name: storesScreen, page: () => Stores()),
+    GetPage(name: usedMarketScreen, page: () => UsedMarketScreen()),
+    GetPage(name: usedMarket, page: () => UsedMarket()),
     GetPage(name: changePassword, page: () => ChangePassword()),
     GetPage(
         name: signIn,

@@ -47,6 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _birthController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  int gender;
   String _countryDialCode;
   String dropdownvalue = 'male'.tr;
 
@@ -313,6 +314,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   onChanged: (newValue) {
                                     setState(() {
                                       dropdownvalue = newValue;
+                                      if (dropdownvalue == 'Male') {
+                                        gender = 0;
+                                        print(gender);
+                                      } else {
+                                        gender = 1;
+                                        print(gender);
+                                      }
                                     });
                                   },
                                 ),
@@ -490,6 +498,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String _number = _phoneController.text.trim();
     String _password = _passwordController.text.trim();
     String _confirmPassword = _confirmPasswordController.text.trim();
+    String _birth = _birthController.text.trim();
+    int Gender = gender;
 
     String _numberWithCountryCode = countryCode + _number;
     bool _isValid = GetPlatform.isWeb ? true : false;
@@ -517,6 +527,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showCustomSnackBar('invalid_phone_number'.tr);
     } else if (_password.isEmpty) {
       showCustomSnackBar('enter_password'.tr);
+    } else if (_birth.isEmpty) {
+      showCustomSnackBar('field_empty'.tr);
     } else if (_password.length < 6) {
       showCustomSnackBar('password_should_be'.tr);
     } else if (_password != _confirmPassword) {
@@ -527,6 +539,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           lName: _lastName,
           email: _email,
           phone: _numberWithCountryCode,
+          birthDate: _birth,
+          gender: Gender,
           password: _password);
       authController.registration(signUpBody).then((status) async {
         if (status.isSuccess) {
