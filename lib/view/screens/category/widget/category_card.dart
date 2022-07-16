@@ -146,8 +146,7 @@ class CategoryWidget extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(Dimensions.RADIUS_SMALL),
           child: CustomImage(
-            image:
-                '/${product.image}',
+            image: '/${product.image}',
             height: _desktop ? 120 : 65,
             width: _desktop ? 120 : 80,
             fit: BoxFit.cover,
@@ -168,16 +167,27 @@ class CategoryWidget extends StatelessWidget {
 
         Padding(
           padding: const EdgeInsets.all(4),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              PriceConverter.convertPrice(product.price),
-              style: robotoMedium.copyWith(
-                fontSize: Dimensions.fontSizeExtraSmall,
-                color: Colors.black,
-                decoration: TextDecoration.lineThrough,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              product.discount > 0
+                  ? Text(
+                      PriceConverter.convertPrice(product.discount),
+                      style: robotoMedium.copyWith(
+                        fontSize: Dimensions.fontSizeExtraSmall,
+                        color: Colors.black,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    )
+                  : SizedBox(),
+              Text(
+                PriceConverter.convertPrice(product.price),
+                style: robotoMedium.copyWith(
+                  fontSize: Dimensions.fontSizeExtraSmall,
+                  color: Colors.black,
+                ),
               ),
-            ),
+            ],
           ),
         ),
         SizedBox(

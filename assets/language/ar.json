@@ -403,5 +403,13 @@
   "price_product": "سعر المنتج",
   "description_product": "وصف المنتج",
   "add_product": "اضافه منتج",
-  "field_empty": "حقل فارغ"
+  "field_empty": "حقل فارغ",
+  "enter_address": "ادخل العنوان",
+  "enter_city": "ادخل المدينه",
+  "enter_country": "ادخل الدوله",
+  "enter_facebook": "ادخل الفيس بوك",
+  "enter_date": "ادخل تاريخ الميلاد",
+  "view_orders": "عرض الطلبات",
+  "orders": "الطلبات",
+  "enter_userName": "ادخل اسم المستخدم"
 }

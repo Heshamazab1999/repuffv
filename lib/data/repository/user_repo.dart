@@ -27,7 +27,8 @@ class UserRepo {
       'country': userInfoModel.country,
       'address': userInfoModel.address,
       'city': userInfoModel.city,
-      "facebook": userInfoModel.facebook
+      "facebook": userInfoModel.facebook,
+      "user_name": userInfoModel.user_name,
     });
     return await apiClient.postMultipartData(
         AppConstants.UPDATE_PROFILE_URI, _body, [MultipartBody('image', data)]);

@@ -1,6 +1,5 @@
 import 'package:efood_multivendor/controller/auth_controller.dart';
 import 'package:efood_multivendor/controller/cart_controller.dart';
-import 'package:efood_multivendor/controller/location_controller.dart';
 import 'package:efood_multivendor/controller/splash_controller.dart';
 import 'package:efood_multivendor/controller/user_controller.dart';
 import 'package:efood_multivendor/controller/wishlist_controller.dart';
@@ -12,6 +11,7 @@ import 'package:efood_multivendor/view/base/confirmation_dialog.dart';
 import 'package:efood_multivendor/view/base/custom_button.dart';
 import 'package:efood_multivendor/view/base/custom_image.dart';
 import 'package:efood_multivendor/view/base/web_menu_bar.dart';
+import 'package:efood_multivendor/view/screens/order/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -27,18 +27,21 @@ class ProfileScreen extends StatelessWidget {
       Images.svgUser,
       Images.SvgGlobe,
       Images.SvgMarker,
-      Images.SvgSettings,
+      Images.orderSvg,
+      Images.SvgSettings
     ];
     final List<String> titles = [
       "personal_information".tr,
       "language".tr,
       "delivery_address".tr,
+      "my_orders".tr,
       "settings".tr,
     ];
     final List<String> subTitles = [
       "design_profile".tr,
       "select_language".tr,
       "add_address".tr,
+      "view_orders".tr,
       "design_profile".tr,
     ];
 
@@ -68,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(height: 10),
                       Container(
                         width: context.width - 25,
-                        height: context.height * 0.25,
+                        height: context.height * 0.3,
                         decoration: BoxDecoration(
                             color: Color(0xFFE1E1E1),
                             borderRadius: BorderRadius.circular(10)),
@@ -100,6 +103,17 @@ class ProfileScreen extends StatelessWidget {
                                       )),
                                   Text(
                                       ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.email : ''}'),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("user".tr,
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: Dimensions.fontSizeLarge,
+                                      )),
+                                  Text(
+                                      ' : ${(userController.userInfoModel != null && _isLoggedIn) ? userController.userInfoModel.user_name : ''}'),
                                 ],
                               ),
                               Row(
@@ -184,44 +198,51 @@ class ProfileScreen extends StatelessWidget {
                           endIndent: 20,
                           indent: 20),
                       SizedBox(height: 10),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          itemCount: 4,
-                          itemBuilder: (ctx, index) => Column(
-                                children: [
-                                  ListTile(
-                                    onTap: () {
-                                      if (index == 0) {
-                                        Get.toNamed(RouteHelper.updateProfile);
-                                      } else if (index == 1) {
-                                        Get.toNamed(RouteHelper.changeLanguage);
-                                      } else if (index == 2) {
-                                        Get.toNamed(RouteHelper.address);
-                                      } else if (index == 3) {
-                                        Get.toNamed(RouteHelper.setting);
-                                      }
-                                    },
-                                    leading: SvgPicture.asset(images[index]),
-                                    trailing: Icon(Icons.arrow_forward_ios),
-                                    title: Text(titles[index].tr,
-                                        style: TextStyle(
-                                          color: Theme.of(context).primaryColor,
-                                          fontSize: Dimensions.fontSizeLarge,
-                                        )),
-                                    subtitle: Text(subTitles[index].tr,
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontSize: Dimensions.fontSizeSmall,
-                                        )),
-                                  ),
-                                  Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                      endIndent: 20,
-                                      indent: 20),
-                                ],
-                              )),
+                      SizedBox(
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: images.length,
+                            itemBuilder: (ctx, index) => Column(
+                                  children: [
+                                    ListTile(
+                                      onTap: () {
+                                        if (index == 0) {
+                                          Get.toNamed(
+                                              RouteHelper.updateProfile);
+                                        } else if (index == 1) {
+                                          Get.toNamed(
+                                              RouteHelper.changeLanguage);
+                                        } else if (index == 2) {
+                                          Get.toNamed(RouteHelper.address);
+                                        } else if (index == 3) {
+                                          Get.to(() => OrderScreen());
+                                        } else if (index == 4) {
+                                          Get.toNamed(RouteHelper.setting);
+                                        }
+                                      },
+                                      leading: SvgPicture.asset(images[index]),
+                                      trailing: Icon(Icons.arrow_forward_ios),
+                                      title: Text(titles[index].tr,
+                                          style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            fontSize: Dimensions.fontSizeLarge,
+                                          )),
+                                      subtitle: Text(subTitles[index].tr,
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                            fontSize: Dimensions.fontSizeSmall,
+                                          )),
+                                    ),
+                                    Divider(
+                                        color: Colors.grey,
+                                        thickness: 1,
+                                        endIndent: 20,
+                                        indent: 20),
+                                  ],
+                                )),
+                      ),
                       SizedBox(height: 20),
                       CustomButton(
                           radius: 25,

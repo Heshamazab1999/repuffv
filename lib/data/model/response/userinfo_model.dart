@@ -4,6 +4,7 @@ class UserInfoModel {
   String lName;
   String email;
   String image;
+  String user_name;
   String phone;
   String password;
   String date_of_birth;
@@ -22,6 +23,7 @@ class UserInfoModel {
       this.email,
       this.image,
       this.phone,
+      this.user_name,
       this.password,
       this.orderCount,
       this.date_of_birth,
@@ -48,6 +50,7 @@ class UserInfoModel {
     city = json['city'];
     gender = json['gender'];
     facebook = json['facebook'];
+    user_name = json['user_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,6 +68,7 @@ class UserInfoModel {
     data['address'] = this.address;
     data['country'] = this.country;
     data['city'] = this.city;
+    data['user_name'] = this.user_name;
 
     return data;
   }

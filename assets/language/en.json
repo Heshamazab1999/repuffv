@@ -403,5 +403,13 @@
   "description_product": "Description Product",
   "price_product": "Price Product",
   "add_product": "Add Product",
-  "field_empty": "Field Empty"
+  "field_empty": "Field Empty",
+  "enter_address": "Enter Address",
+  "enter_city": "Enter City",
+  "enter_country": "Enter Country",
+  "enter_facebook": "Enter FaceBook",
+  "enter_date": "Enter Date Of Birth",
+  "view_orders": "View Orders",
+  "orders": "Orders",
+  "enter_userName": "Enter UserName"
 }

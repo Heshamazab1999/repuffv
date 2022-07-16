@@ -286,7 +286,7 @@ class _CategoryProductScreenState extends State<CategoryProductScreen>
                               !catController.isSearching)
                           ? Center(
                               child: SizedBox(
-                              height: 45,
+                              height: 50,
                               width: Dimensions.WEB_MAX_WIDTH,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,

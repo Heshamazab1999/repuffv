@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:badges/badges.dart';
+import 'package:efood_multivendor/controller/cart_controller.dart';
 import 'package:efood_multivendor/helper/responsive_helper.dart';
 import 'package:efood_multivendor/util/dimensions.dart';
 import 'package:efood_multivendor/util/images.dart';
@@ -116,31 +118,54 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
-                      child: Row(children: [
-                        BottomNavItem(
-                            iconData: Images.home_icon,
-                            isSelected: _pageIndex == 0,
-                            onTap: () => _setPage(0)),
-                        BottomNavItem(
-                            iconData: Images.shopping_icon,
-                            isSelected: _pageIndex == 1,
-                            onTap: () => _setPage(1)),
-                        Expanded(child: SizedBox()),
-                        BottomNavItem(
-                            iconData: Images.comment_icon,
-                            isSelected: _pageIndex == 3,
-                            onTap: () => _setPage(3)),
-                        BottomNavItem(
-                            iconData: Images.fav_icon,
-                            isSelected: _pageIndex == 4,
-                            onTap: () {
-                              _setPage(4);
-                            })
-                        //   Get.bottomSheet(MenuScreen(),
-                        //       backgroundColor: Colors.transparent,
-                        //       isScrollControlled: true);
-                        // }),
-                      ]),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            BottomNavItem(
+                                iconData: Images.home_icon,
+                                isSelected: _pageIndex == 0,
+                                onTap: () => _setPage(0)),
+
+                            GetBuilder<CartController>(
+                                builder: (cartController) {
+                              return Badge(
+                                  badgeColor: cartController.cartList.length > 0
+                                      ? Colors.white
+                                      : Colors.white,
+                                  elevation: 0,
+                                  badgeContent: Text(
+                                      cartController.cartList.length > 0
+                                          ? cartController.cartList.length
+                                              .toString()
+                                          : '',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color:
+                                            cartController.cartList.length > 0
+                                                ? Theme.of(context).primaryColor
+                                                : Theme.of(context).cardColor,
+                                      )),
+                                  child: BottomNavItem(
+                                      iconData: Images.shopping_icon,
+                                      isSelected: _pageIndex == 1,
+                                      onTap: () => _setPage(1)));
+                            }),
+                            SizedBox(width: 50),
+                            BottomNavItem(
+                                iconData: Images.comment_icon,
+                                isSelected: _pageIndex == 3,
+                                onTap: () => _setPage(3)),
+                            BottomNavItem(
+                                iconData: Images.fav_icon,
+                                isSelected: _pageIndex == 4,
+                                onTap: () {
+                                  _setPage(4);
+                                })
+                            //   Get.bottomSheet(MenuScreen(),
+                            //       backgroundColor: Colors.transparent,
+                            //       isScrollControlled: true);
+                            // }),
+                          ]),
                     ),
                   ),
                 ),

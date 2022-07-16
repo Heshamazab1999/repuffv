@@ -31,7 +31,7 @@ class CategoryView extends StatelessWidget {
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    childAspectRatio: 1 / 3,
+                    childAspectRatio: 3 / 3.4,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10),
                 controller: _scrollController,
@@ -41,50 +41,49 @@ class CategoryView extends StatelessWidget {
                 padding: EdgeInsets.only(left: Dimensions.PADDING_SIZE_SMALL),
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 1),
-                    child: InkWell(
-                      onTap: () =>
-                          Get.toNamed(RouteHelper.getCategoryProductRoute(
-                        categoryController.categoryList[index].id,
-                        categoryController.categoryList[index].name,
-                      )),
-                      child: Column(children: [
-                        Container(
-                          height: 100,
+                  return InkWell(
+                    onTap: () =>
+                        Get.toNamed(RouteHelper.getCategoryProductRoute(
+                      categoryController.categoryList[index].id,
+                      categoryController.categoryList[index].name,
+                    )),
+                    child: Column(children: [
+                      Container(
+                        clipBehavior: Clip.antiAlias,
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: 1,
+                          ),
+                        ),
+                        child: CustomImage(
                           width: 100,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            border: Border.all(
-                                color: Theme.of(context).primaryColor,
-                                width: 1,
-                                style: BorderStyle.solid),
-                          ),
-                          child: CustomImage(
-                            image:
-                                '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',
-                            fit: BoxFit.cover,
-                          ),
+                          height: 100,
+                          image:
+                              '${Get.find<SplashController>().configModel.baseUrls.categoryImageUrl}/${categoryController.categoryList[index].image}',
+                          fit: BoxFit.cover,
                         ),
-                        SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              right: index == 0
-                                  ? Dimensions.PADDING_SIZE_EXTRA_SMALL
-                                  : 0),
-                          child: Text(
-                            categoryController.categoryList[index].name,
-                            style: robotoMedium.copyWith(
-                                fontSize: 14,
-                                color: Theme.of(context).primaryColor),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
+                      ),
+                      SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: index == 0
+                                ? Dimensions.PADDING_SIZE_EXTRA_SMALL
+                                : 0),
+                        child: Text(
+                          categoryController.categoryList[index].name,
+                          style: robotoMedium.copyWith(
+                              fontSize: 14,
+                              color: Theme.of(context).primaryColor),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
                         ),
-                      ]),
-                    ),
+                      ),
+                    ]),
                   );
                 },
               )

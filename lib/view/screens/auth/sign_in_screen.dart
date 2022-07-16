@@ -96,40 +96,37 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Scaffold(
           appBar: ResponsiveHelper.isDesktop(context)
               ? WebMenuBar()
-              : !widget.exitFromApp
-                  ? PreferredSize(
-                      preferredSize:
-                          Size.fromHeight(60.0), // here the desired height
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        child: AppBar(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    Dimensions.RADIUS_EXTRA_LARGE)),
-                            automaticallyImplyLeading: false,
-                            title: Container(
-                                clipBehavior: Clip.antiAlias,
-                                width: 50,
-                                height: 50,
-                                child: Center(
-                                  child: Image.asset(
-                                    Images.logopng,
-                                  ),
-                                ),
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white)),
-                            centerTitle: true,
-                            // leading: IconButton(
-                            //   onPressed: () => Get.back(),
-                            //   icon: Icon(Icons.arrow_back_ios_rounded,
-                            //       color: Theme.of(context).textTheme.bodyText1.color),
-                            // ),
-                            elevation: 0,
-                            backgroundColor: Theme.of(context).primaryColor),
-                      ))
-                  : null,
+              : PreferredSize(
+                  preferredSize:
+                      Size.fromHeight(60.0), // here the desired height
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: AppBar(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                Dimensions.RADIUS_EXTRA_LARGE)),
+                        automaticallyImplyLeading: false,
+                        title: Container(
+                            clipBehavior: Clip.antiAlias,
+                            width: 50,
+                            height: 50,
+                            child: Center(
+                              child: Image.asset(
+                                Images.logopng,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.white)),
+                        centerTitle: true,
+                        // leading: IconButton(
+                        //   onPressed: () => Get.back(),
+                        //   icon: Icon(Icons.arrow_back_ios_rounded,
+                        //       color: Theme.of(context).textTheme.bodyText1.color),
+                        // ),
+                        elevation: 0,
+                        backgroundColor: Theme.of(context).primaryColor),
+                  )),
           body: SafeArea(
               child: Center(
             child: Scrollbar(
@@ -382,28 +379,30 @@ class _SignInScreenState extends State<SignInScreen> {
   void _login(AuthController authController, String countryDialCode) async {
     String _phone = _phoneController.text.trim();
     String _password = _passwordController.text.trim();
-    String _numberWithCountryCode = countryDialCode + _phone;
-    bool _isValid = GetPlatform.isWeb ? true : false;
-    if (!GetPlatform.isWeb) {
-      try {
-        PhoneNumber phoneNumber =
-            await PhoneNumberUtil().parse(_numberWithCountryCode);
-        _numberWithCountryCode =
-            '+' + phoneNumber.countryCode + phoneNumber.nationalNumber;
-        _isValid = true;
-      } catch (e) {}
-    }
+    // String _numberWithCountryCode = countryDialCode + _phone;
+    // bool _isValid = GetPlatform.isWeb ? true : false;
+    // if (!GetPlatform.isWeb) {
+    //   try {
+    //     PhoneNumber phoneNumber =
+    //         await PhoneNumberUtil().parse(_numberWithCountryCode);
+    //     _numberWithCountryCode =
+    //         '+' + phoneNumber.countryCode + phoneNumber.nationalNumber;
+    //     _isValid = true;
+    //   } catch (e) {}
+    // }
     if (_phone.isEmpty) {
       showCustomSnackBar('enter_phone_number'.tr);
-    } else if (!_isValid) {
-      showCustomSnackBar('invalid_phone_number'.tr);
-    } else if (_password.isEmpty) {
+    }
+    // else if (!_isValid) {
+    //   showCustomSnackBar('invalid_phone_number'.tr);
+    // }
+    else if (_password.isEmpty) {
       showCustomSnackBar('enter_password'.tr);
     } else if (_password.length < 6) {
       showCustomSnackBar('password_should_be'.tr);
     } else {
       authController
-          .login(_numberWithCountryCode, _password)
+          .login(_phone, _password)
           .then((status) async {
         if (status.isSuccess) {
           if (authController.isActiveRememberMe) {
@@ -418,7 +417,7 @@ class _SignInScreenState extends State<SignInScreen> {
             List<int> _encoded = utf8.encode(_password);
             String _data = base64Encode(_encoded);
             Get.toNamed(RouteHelper.getVerificationRoute(
-                _numberWithCountryCode, _token, RouteHelper.signUp, _data));
+                _phone, _token, RouteHelper.signUp, _data));
           } else {
             Get.toNamed(RouteHelper.getAccessLocationRoute('sign-in'));
           }

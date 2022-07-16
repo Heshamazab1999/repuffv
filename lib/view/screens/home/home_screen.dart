@@ -91,6 +91,7 @@ class HomeScreen extends StatelessWidget {
                                 Dimensions.RADIUS_EXTRA_LARGE)),
                         floating: true,
                         elevation: 0,
+
                         automaticallyImplyLeading: false,
                         backgroundColor: ResponsiveHelper.isDesktop(context)
                             ? Colors.transparent

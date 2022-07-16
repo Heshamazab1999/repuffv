@@ -10,14 +10,12 @@ class BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: IconButton(
-        icon: SvgPicture.asset(
-          iconData,
-          color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
-        ),
-        onPressed: onTap,
+    return IconButton(
+      icon: SvgPicture.asset(
+        iconData,
+        color: isSelected ? Theme.of(context).primaryColor : Colors.grey,
       ),
+      onPressed: onTap,
     );
   }
 }

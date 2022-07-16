@@ -7,15 +7,12 @@ import 'package:efood_multivendor/data/model/response/response_model.dart';
 import 'package:efood_multivendor/data/model/response/userinfo_model.dart';
 import 'package:efood_multivendor/helper/responsive_helper.dart';
 import 'package:efood_multivendor/util/dimensions.dart';
-import 'package:efood_multivendor/util/styles.dart';
 import 'package:efood_multivendor/view/base/custom_button.dart';
 import 'package:efood_multivendor/view/base/custom_image.dart';
 import 'package:efood_multivendor/view/base/custom_snackbar.dart';
-import 'package:efood_multivendor/view/base/my_text_field.dart';
 import 'package:efood_multivendor/view/base/not_logged_in_screen.dart';
 import 'package:efood_multivendor/view/base/web_menu_bar.dart';
 import 'package:efood_multivendor/view/screens/change_password/widget/text_field.dart';
-import 'package:efood_multivendor/view/screens/profile/widget/profile_bg_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,6 +28,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final FocusNode _phoneFocus = FocusNode();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _dateOfBirth = TextEditingController();
@@ -67,6 +65,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       body: GetBuilder<UserController>(builder: (userController) {
         if (userController.userInfoModel != null &&
             _phoneController.text.isEmpty) {
+          _userNameController.text = userController.userInfoModel.user_name;
           _firstNameController.text = userController.userInfoModel.fName ?? '';
           _lastNameController.text = userController.userInfoModel.lName ?? '';
           _phoneController.text = userController.userInfoModel.phone ?? '';
@@ -159,7 +158,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               Expanded(
                                 flex: 2,
                                 child: Text(
-                                  "user".tr + " : ",
+                                  "last_name".tr + " : ",
                                   style: TextStyle(
                                       fontSize: 16,
                                       color: Theme.of(context).primaryColor),
@@ -170,6 +169,31 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                 child: FixedTextField(
                                   onChanged: (v) {
                                     _lastNameController.text = v;
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 5),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  "user".tr + " : ",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 5,
+                                child: FixedTextField(
+                                  onChanged: (v) {
+                                    _userNameController.text = v;
                                   },
                                 ),
                               ),
@@ -445,6 +469,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 
   void _updateProfile(UserController userController) async {
+    String _username = _userNameController.text.trim();
     String _firstName = _firstNameController.text.trim();
     String _lastName = _lastNameController.text.trim();
     String _email = _emailController.text.trim();
@@ -464,6 +489,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         userController.userInfoModel.country == _country &&
         userController.userInfoModel.facebook == _facebook &&
         userController.userInfoModel.date_of_birth == _dateofBirth &&
+        userController.userInfoModel.user_name == _username &&
         userController.userInfoModel.gender == Gender &&
         userController.pickedFile == null) {
       showCustomSnackBar('change_something_to_update'.tr);
@@ -479,22 +505,25 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       showCustomSnackBar('enter_phone_number'.tr);
     } else if (_phoneNumber.length < 6) {
       showCustomSnackBar('enter_a_valid_phone_number'.tr);
-    } else if (_addressController.text.isEmpty) {
+    } else if (_address.isEmpty) {
       showCustomSnackBar('enter_address'.tr);
-    } else if (_cityController.text.isEmpty) {
+    } else if (_city.isEmpty) {
       showCustomSnackBar('enter_city'.tr);
-    } else if (_countryController.text.isEmpty) {
+    } else if (_country.isEmpty) {
       showCustomSnackBar('enter_country'.tr);
-    } else if (_facebookController.text.isEmpty) {
-      showCustomSnackBar('enter_facebook_link'.tr);
-    } else if (_dateOfBirth.text.isEmpty) {
-      showCustomSnackBar('date_birth'.tr);
+    } else if (_facebook.isEmpty) {
+      showCustomSnackBar('enter_facebook'.tr);
+    } else if (_dateofBirth.isEmpty) {
+      showCustomSnackBar('enter_date'.tr);
+    } else if (_username.isEmpty) {
+      showCustomSnackBar('enter_userName'.tr);
     } else {
       UserInfoModel _updatedUser = UserInfoModel(
           fName: _firstName,
           lName: _lastName,
           email: _email,
           phone: _phoneNumber,
+          user_name: _username,
           address: _address,
           city: _city,
           date_of_birth: _dateofBirth,

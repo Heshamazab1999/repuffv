@@ -13,33 +13,43 @@ class CalenderScreen extends StatefulWidget {
 
 class _CalenderScreenState extends State<CalenderScreen> {
   bool _checkConfiguration() => true;
-  DateTime dateTime = DateTime.now();
+
+  // DateTime dateTime = DateTime.now();
   String selectTime;
   int check = 0;
 
-  void initState() {
-    super.initState();
-    if (_checkConfiguration()) {
-      Future.delayed(Duration.zero, () {
+  // void initState() {
+  //   super.initState();
+  //   if (_checkConfiguration()) {
+  //     Future.delayed(Duration.zero, () {
+  //       DatePicker.showDatePicker(context,
+  //           showTitleActions: true,
+  //           minTime: DateTime(1950, 1, 1),
+  //           maxTime: DateTime(2030, 12, 30), onChanged: (date) {
+  //         selectTime = "${(dateTime.difference(date).inDays / 365).round()}";
+  //         check = int.parse(selectTime);
+  //         print('confirm $selectTime');
+  //         print('confirm $check');
+  //         print('change $date');
+  //       }, onConfirm: (date) {
+  //         selectTime = "${(dateTime.difference(date).inDays / 365).round()}";
+  //         check = int.parse(selectTime);
+  //         print('confirm $selectTime');
+  //         print('confirm $check');
+  //       }, currentTime: DateTime.now(), locale: LocaleType.en);
+  //     });
+  //   }
+  // }
 
-        DatePicker.showDatePicker(context,
-            showTitleActions: true,
-            minTime: DateTime(1950, 1, 1),
-            maxTime: DateTime(2030, 12, 30), onChanged: (date) {
-          selectTime = "${(dateTime.difference(date).inDays / 365).round()}";
-          check = int.parse(selectTime);
-          print('confirm $selectTime');
-          print('confirm $check');
-          print('change $date');
-        }, onConfirm: (date) {
-          selectTime = "${(dateTime.difference(date).inDays / 365).round()}";
-          check = int.parse(selectTime);
-          print('confirm $selectTime');
-          print('confirm $check');
-        }, currentTime: DateTime.now(), locale: LocaleType.en);
-      });
-    }
-  }
+  final dateTime = DateTime.now().obs;
+
+  Future<DateTime> showCalender({BuildContext context}) async =>
+      await showDatePicker(
+        context: context,
+        lastDate: DateTime(2100),
+        firstDate: DateTime(1950),
+        initialDate: dateTime.value,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +60,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
           child: CustomButton(
             buttonText: "next".tr,
             radius: 50,
-            onPressed: () {
+            onPressed: () async {
+              final date = await showCalender(context: context);
+              if (date == null) {
+                return null;
+              } else {
+                print(date.toIso8601String());
+                selectTime =
+                    "${(dateTime.value.difference(date).inDays / 365).round()}";
+                check = int.parse(selectTime);
+                print('confirm $selectTime');
+                print('confirm $check');
+              }
+
               if (check <= 18) {
                 Get.snackbar("Can't Login in", "You are less than 18 year old",
                     backgroundColor: Color(0xFFDB0013),

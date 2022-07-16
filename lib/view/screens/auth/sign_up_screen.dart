@@ -19,6 +19,7 @@ import 'package:efood_multivendor/view/screens/auth/widget/condition_check_box.d
 import 'package:efood_multivendor/view/screens/auth/widget/guest_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:phone_number/phone_number.dart';
 import 'package:social_login_buttons/social_login_buttons.dart';
 
@@ -35,6 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final FocusNode _firstNameFocus = FocusNode();
   final FocusNode _lastNameFocus = FocusNode();
   final FocusNode _emailFocus = FocusNode();
+  final FocusNode _userFocus = FocusNode();
   final FocusNode _phoneFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
   final FocusNode _birthFocus = FocusNode();
@@ -43,6 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _birthController = TextEditingController();
   final TextEditingController _confirmPasswordController =
@@ -50,6 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   int gender;
   String _countryDialCode;
   String dropdownvalue = 'male'.tr;
+  String dateBirth;
 
   // List of items in our dropdown menu
   var items = [
@@ -65,6 +69,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Get.find<SplashController>().configModel.country)
         .dialCode;
   }
+
+  final dateTime = DateTime.now().obs;
+
+  Future<DateTime> showCalender({BuildContext context}) async =>
+      await showDatePicker(
+        context: context,
+        lastDate: DateTime(2100),
+        firstDate: DateTime(1950),
+        initialDate: dateTime.value,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +106,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   fontSize: 25,
                                 )),
                             leading: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               icon: Icon(
                                   Icons.keyboard_double_arrow_left_outlined,
                                   size: 40),
@@ -176,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               nextFocus: _lastNameFocus,
                               inputType: TextInputType.name,
                               capitalization: TextCapitalization.words,
-                              prefixIcon: Images.user,
+                              // prefixIcon: Images.user,
                               divider: true,
                             ),
                           ),
@@ -199,8 +215,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               hintText: 'last_name'.tr,
                               controller: _lastNameController,
                               focusNode: _lastNameFocus,
+                              nextFocus: _userFocus,
+                              // inputType: TextInputType.name,
+                              capitalization: TextCapitalization.words,
+                              prefixIcon: Images.user,
+                              divider: true,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: Text('user'.tr,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: Dimensions.fontSizeLarge,
+                                )),
+                          ),
+                          Expanded(
+                            child: CustomTextField(
+                              border: AppConstants.decorationSignUpScreen,
+                              focusBorder: AppConstants.decorationSignUpScreen,
+                              hintText: 'enter_userName'.tr,
+                              controller: _userNameController,
+                              focusNode: _userFocus,
                               nextFocus: _emailFocus,
-                              inputType: TextInputType.name,
+                              // inputType: TextInputType.name,
                               capitalization: TextCapitalization.words,
                               prefixIcon: Images.user,
                               divider: true,
@@ -227,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               focusNode: _emailFocus,
                               nextFocus: _phoneFocus,
                               inputType: TextInputType.emailAddress,
-                              prefixIcon: Images.mail,
+                              // prefixIcon: Images.mail,
                               divider: true,
                             ),
                           ),
@@ -258,7 +300,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           focusNode: _phoneFocus,
                           nextFocus: _passwordFocus,
                           inputType: TextInputType.phone,
-                          divider: false,
+                          divider: true,
                         )),
                       ]),
                       Row(
@@ -331,13 +373,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 100,
-                            child: Text('date_birth'.tr,
-                                style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: Dimensions.fontSizeLarge,
-                                )),
+                          Row(
+                            children: [
+                              Text('date_birth'.tr,
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: Dimensions.fontSizeLarge,
+                                  )),
+                              IconButton(
+                                  onPressed: () async {
+                                    final date =
+                                        await showCalender(context: context);
+                                    if (date == null) {
+                                      return null;
+                                    } else {
+                                      print(date.toIso8601String());
+                                      DateFormat dateFormat =
+                                          DateFormat("yyyy-MM-dd");
+                                      dateBirth = dateFormat.format(date);
+                                      _birthController.text = dateBirth;
+                                      print(dateBirth);
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.date_range,
+                                    color: Theme.of(context).primaryColor,
+                                  ))
+                            ],
                           ),
                           Expanded(
                             child: CustomTextField(
@@ -347,8 +409,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: _birthController,
                               focusNode: _birthFocus,
                               nextFocus: _passwordFocus,
-                              inputType: TextInputType.visiblePassword,
-                              prefixIcon: Images.lock,
+                              inputType: TextInputType.text,
+                              // prefixIcon: Images.lock,
                               isPassword: false,
                               divider: true,
                             ),
@@ -374,7 +436,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               focusNode: _passwordFocus,
                               nextFocus: _confirmPasswordFocus,
                               inputType: TextInputType.visiblePassword,
-                              prefixIcon: Images.lock,
+                              // prefixIcon: Images.lock,
                               isPassword: true,
                               divider: true,
                             ),
@@ -400,7 +462,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               focusNode: _confirmPasswordFocus,
                               inputAction: TextInputAction.done,
                               inputType: TextInputType.visiblePassword,
-                              prefixIcon: Images.lock,
+                              // prefixIcon: Images.lock,
                               isPassword: true,
                               onSubmit: (text) => (GetPlatform.isWeb &&
                                       authController.acceptTerms)
@@ -499,6 +561,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String _password = _passwordController.text.trim();
     String _confirmPassword = _confirmPasswordController.text.trim();
     String _birth = _birthController.text.trim();
+    String _user = _userNameController.text.trim();
     int Gender = gender;
 
     String _numberWithCountryCode = countryCode + _number;
@@ -533,6 +596,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       showCustomSnackBar('password_should_be'.tr);
     } else if (_password != _confirmPassword) {
       showCustomSnackBar('confirm_password_does_not_matched'.tr);
+    } else if (_user.isEmpty) {
+      showCustomSnackBar('enter_username'.tr);
     } else {
       SignUpBody signUpBody = SignUpBody(
           fName: _firstName,
@@ -541,6 +606,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           phone: _numberWithCountryCode,
           birthDate: _birth,
           gender: Gender,
+          user_name: _user,
           password: _password);
       authController.registration(signUpBody).then((status) async {
         if (status.isSuccess) {
