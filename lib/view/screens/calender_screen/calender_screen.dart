@@ -1,8 +1,10 @@
+import 'package:efood_multivendor/controller/auth_controller.dart';
 import 'package:efood_multivendor/helper/route_helper.dart';
 import 'package:efood_multivendor/view/base/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CalenderScreen extends StatefulWidget {
   const CalenderScreen({Key key}) : super(key: key);
@@ -12,8 +14,6 @@ class CalenderScreen extends StatefulWidget {
 }
 
 class _CalenderScreenState extends State<CalenderScreen> {
-  bool _checkConfiguration() => true;
-
   // DateTime dateTime = DateTime.now();
   String selectTime;
   int check = 0;
@@ -58,7 +58,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
         child: SizedBox(
           width: 250,
           child: CustomButton(
-            buttonText: "next".tr,
+            buttonText: "enter_birthDate".tr,
             radius: 50,
             onPressed: () async {
               final date = await showCalender(context: context);
@@ -66,6 +66,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 return null;
               } else {
                 print(date.toIso8601String());
+                DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+                Get.find<AuthController>().birthDate(dateFormat.format(date));
+
                 selectTime =
                     "${(dateTime.value.difference(date).inDays / 365).round()}";
                 check = int.parse(selectTime);

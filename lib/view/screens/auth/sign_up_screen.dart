@@ -50,6 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _birthController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   int gender;
   String _countryDialCode;
   String dropdownvalue = 'male'.tr;
@@ -405,7 +406,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             child: CustomTextField(
                               border: AppConstants.decorationSignUpScreen,
                               focusBorder: AppConstants.decorationSignUpScreen,
-                              hintText: 'date_birth'.tr,
+                              hintText: authController.birtDate.value.isEmpty
+                                  ? 'date_birth'.tr
+                                  : authController.birtDate.value,
+
                               controller: _birthController,
                               focusNode: _birthFocus,
                               nextFocus: _passwordFocus,
@@ -560,7 +564,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String _number = _phoneController.text.trim();
     String _password = _passwordController.text.trim();
     String _confirmPassword = _confirmPasswordController.text.trim();
-    String _birth = _birthController.text.trim();
+    String _birth = _birthController.text.trim().isEmpty
+        ? authController.birtDate.value
+        : _birthController.text.trim();
     String _user = _userNameController.text.trim();
     int Gender = gender;
 

@@ -411,5 +411,6 @@
   "enter_date": "Enter Date Of Birth",
   "view_orders": "View Orders",
   "orders": "Orders",
-  "enter_userName": "Enter UserName"
+  "enter_userName": "Enter UserName",
+  "enter_birthDate": "Enter BirthDate"
 }

@@ -411,5 +411,6 @@
   "enter_date": "ادخل تاريخ الميلاد",
   "view_orders": "عرض الطلبات",
   "orders": "الطلبات",
-  "enter_userName": "ادخل اسم المستخدم"
+  "enter_userName": "ادخل اسم المستخدم",
+  "enter_birthDate": "ادخل تاريخ الميلاد"
 }
